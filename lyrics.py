@@ -71,6 +71,9 @@ def transcribe_file(model, audio, out, lang=None, on_progress=None, lrc=False):
         no_speech_threshold=None,
         condition_on_previous_text=False,
         beam_size=5,
+        # Sans amorce, Whisper remplace parfois la 1re fenêtre de 30 s (intro musicale
+        # puis chant) par un simple titre halluciné et perd les premières phrases.
+        initial_prompt="Song lyrics.",
     )
     lines, lrc_lines = [], []
     for s in segments:
